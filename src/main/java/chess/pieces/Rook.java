@@ -1,5 +1,8 @@
 package chess.pieces;
 
+import java.util.List;
+
+import chess.GameState;
 import chess.Player;
 
 /**
@@ -14,5 +17,10 @@ public class Rook extends Piece {
     @Override
     protected char getIdentifyingCharacter() {
         return 'r';
+    }
+    
+    @Override
+    public List<String> getPossibleMoves(GameState gameState) {
+    	return null;
     }
 }

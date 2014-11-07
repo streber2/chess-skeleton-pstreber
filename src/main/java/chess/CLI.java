@@ -3,6 +3,7 @@ package chess;
 import chess.pieces.Piece;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * This class provides the basic CLI interface to the Chess game.
@@ -64,7 +65,8 @@ public class CLI {
                 } else if (input.equals("board")) {
                     writeOutput("Current Game:");
                 } else if (input.equals("list")) {
-                    writeOutput("====> List Is Not Implemented (yet) <====");
+                	listMoves();
+                    //writeOutput("====> List Is Not Implemented (yet) <====");
                 } else if (input.startsWith("move")) {
                     writeOutput("====> Move Is Not Implemented (yet) <====");
                 } else {
@@ -77,6 +79,31 @@ public class CLI {
     private void doNewGame() {
         gameState = new GameState();
         gameState.reset();
+    }
+    
+    private void listMoves(){
+    	// Loop through each cell on the board
+    	// If the piece at that cell is the piece for the current player
+    	// Call that piece's listPossibleMoves method
+    	
+    	ArrayList<String> listOfMoves = new ArrayList<String>();
+    	int count = 0;
+    	for (int i = 1; i <= 8; i++){
+    		for (char j = 'a'; j<='h'; j++){
+    			count++;
+    			writeOutput("i is " + i+" and j is " + j);
+    			   			
+    			Piece selectedPiece = gameState.getPieceAt(new Position(j, i));
+    			if (selectedPiece !=null){
+    				if (selectedPiece.getOwner() == gameState.getCurrentPlayer()){
+    					listOfMoves.addAll(selectedPiece.getPossibleMoves(gameState));
+    				}
+    			}
+    			
+    		}
+    	}
+    	writeOutput(" " +count);
+    	
     }
 
     private void showBoard() {

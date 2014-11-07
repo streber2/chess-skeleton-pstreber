@@ -1,6 +1,8 @@
 package chess.pieces;
 
 import chess.Player;
+import java.util.List;
+import chess.GameState;
 
 /**
  * A base class for chess pieces
@@ -26,4 +28,6 @@ public abstract class Piece {
     }
 
     protected abstract char getIdentifyingCharacter();
+    
+    public abstract List<String> getPossibleMoves(GameState gameState);
 }
