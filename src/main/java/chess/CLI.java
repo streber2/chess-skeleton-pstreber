@@ -4,6 +4,7 @@ import chess.pieces.Piece;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class provides the basic CLI interface to the Chess game.
@@ -87,22 +88,28 @@ public class CLI {
     	// Call that piece's listPossibleMoves method
     	
     	ArrayList<String> listOfMoves = new ArrayList<String>();
-    	int count = 0;
+    	
     	for (int i = 1; i <= 8; i++){
     		for (char j = 'a'; j<='h'; j++){
-    			count++;
-    			writeOutput("i is " + i+" and j is " + j);
+    			
     			   			
     			Piece selectedPiece = gameState.getPieceAt(new Position(j, i));
     			if (selectedPiece !=null){
     				if (selectedPiece.getOwner() == gameState.getCurrentPlayer()){
-    					listOfMoves.addAll(selectedPiece.getPossibleMoves(gameState));
+    					List<String> pieceMoves = selectedPiece.getPossibleMoves(gameState);
+    					if (pieceMoves !=null){
+    						listOfMoves.addAll(pieceMoves);
+    					}
     				}
     			}
     			
     		}
     	}
-    	writeOutput(" " +count);
+    	
+    	for (String output : listOfMoves){
+    		writeOutput(output);
+    	}
+    	
     	
     }
 

@@ -38,40 +38,40 @@ public class GameState {
      */
     public void reset() {
         // White Pieces
-        placePiece(new Rook(Player.White), new Position("a1"));
-        placePiece(new Knight(Player.White), new Position("b1"));
-        placePiece(new Bishop(Player.White), new Position("c1"));
-        placePiece(new Queen(Player.White), new Position("d1"));
-        placePiece(new King(Player.White), new Position("e1"));
-        placePiece(new Bishop(Player.White), new Position("f1"));
-        placePiece(new Knight(Player.White), new Position("g1"));
-        placePiece(new Rook(Player.White), new Position("h1"));
-        placePiece(new Pawn(Player.White), new Position("a2"));
-        placePiece(new Pawn(Player.White), new Position("b2"));
-        placePiece(new Pawn(Player.White), new Position("c2"));
-        placePiece(new Pawn(Player.White), new Position("d2"));
-        placePiece(new Pawn(Player.White), new Position("e2"));
-        placePiece(new Pawn(Player.White), new Position("f2"));
-        placePiece(new Pawn(Player.White), new Position("g2"));
-        placePiece(new Pawn(Player.White), new Position("h2"));
+        placePiece(new Rook(Player.White, new Position("a1")), new Position("a1"));
+        placePiece(new Knight(Player.White, new Position("b1")), new Position("b1"));
+        placePiece(new Bishop(Player.White, new Position("c1")), new Position("c1"));
+        placePiece(new Queen(Player.White, new Position("d1")), new Position("d1"));
+        placePiece(new King(Player.White, new Position("e1")), new Position("e1"));
+        placePiece(new Bishop(Player.White, new Position("f1")), new Position("f1"));
+        placePiece(new Knight(Player.White, new Position("g1")), new Position("g1"));
+        placePiece(new Rook(Player.White, new Position("h1")), new Position("h1"));
+        placePiece(new Pawn(Player.White, new Position("a2")), new Position("a2"));
+        placePiece(new Pawn(Player.White, new Position("b2")), new Position("b2"));
+        placePiece(new Pawn(Player.White, new Position("c2")), new Position("c2"));
+        placePiece(new Pawn(Player.White, new Position("d2")), new Position("d2"));
+        placePiece(new Pawn(Player.White, new Position("e2")), new Position("e2"));
+        placePiece(new Pawn(Player.White, new Position("f2")), new Position("f2"));
+        placePiece(new Pawn(Player.White, new Position("g2")), new Position("g2"));
+        placePiece(new Pawn(Player.White, new Position("h2")), new Position("h2"));
 
         // Black Pieces
-        placePiece(new Rook(Player.Black), new Position("a8"));
-        placePiece(new Knight(Player.Black), new Position("b8"));
-        placePiece(new Bishop(Player.Black), new Position("c8"));
-        placePiece(new Queen(Player.Black), new Position("d8"));
-        placePiece(new King(Player.Black), new Position("e8"));
-        placePiece(new Bishop(Player.Black), new Position("f8"));
-        placePiece(new Knight(Player.Black), new Position("g8"));
-        placePiece(new Rook(Player.Black), new Position("h8"));
-        placePiece(new Pawn(Player.Black), new Position("a7"));
-        placePiece(new Pawn(Player.Black), new Position("b7"));
-        placePiece(new Pawn(Player.Black), new Position("c7"));
-        placePiece(new Pawn(Player.Black), new Position("d7"));
-        placePiece(new Pawn(Player.Black), new Position("e7"));
-        placePiece(new Pawn(Player.Black), new Position("f7"));
-        placePiece(new Pawn(Player.Black), new Position("g7"));
-        placePiece(new Pawn(Player.Black), new Position("h7"));
+        placePiece(new Rook(Player.Black, new Position("a8")), new Position("a8"));
+        placePiece(new Knight(Player.Black, new Position("b8")), new Position("b8"));
+        placePiece(new Bishop(Player.Black, new Position("c8")), new Position("c8"));
+        placePiece(new Queen(Player.Black, new Position("d8")), new Position("d8"));
+        placePiece(new King(Player.Black, new Position("e8")), new Position("e8"));
+        placePiece(new Bishop(Player.Black, new Position("f8")), new Position("f8"));
+        placePiece(new Knight(Player.Black, new Position("g8")), new Position("g8"));
+        placePiece(new Rook(Player.Black, new Position("h8")), new Position("h8"));
+        placePiece(new Pawn(Player.Black, new Position("a7")), new Position("a7"));
+        placePiece(new Pawn(Player.Black, new Position("b7")), new Position("b7"));
+        placePiece(new Pawn(Player.Black, new Position("c7")), new Position("c7"));
+        placePiece(new Pawn(Player.Black, new Position("d7")), new Position("d7"));
+        placePiece(new Pawn(Player.Black, new Position("e7")), new Position("e7"));
+        placePiece(new Pawn(Player.Black, new Position("f7")), new Position("f7"));
+        placePiece(new Pawn(Player.Black, new Position("g7")), new Position("g7"));
+        placePiece(new Pawn(Player.Black, new Position("h7")), new Position("h7"));
     }
 
     /**

@@ -37,6 +37,17 @@ public class Position {
     public char getColumn() {
         return column;
     }
+    
+    public static Position getPositionOffset(Position origin, int colOffset, int rowOffset){
+    	if ((Position.MIN_ROW <= origin.getRow()+rowOffset) && 
+    			(origin.getRow()+rowOffset <= Position.MAX_ROW) &&
+    			(origin.getColumn()+colOffset <= Position.MAX_COLUMN) && 
+    			(Position.MIN_COLUMN <= origin.getColumn()+colOffset))
+    		return new Position((char)(origin.column+colOffset), origin.row+rowOffset);
+    	else
+    		return null;
+    }
+    
 
     @Override
     public boolean equals(Object o) {
