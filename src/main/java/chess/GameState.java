@@ -7,8 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import chess.pieces.Bishop;
+import chess.pieces.Knight;
 import chess.pieces.Pawn;
 import chess.pieces.King;
+import chess.pieces.Queen;
 import chess.pieces.Rook;
 
 /**
@@ -46,55 +48,58 @@ public class GameState {
      */
     public void reset() {
         // White Pieces
-//        placePiece(new Rook(Player.White, new Position("a1")), new Position("a1"));
-//        placePiece(new Knight(Player.White, new Position("b1")), new Position("b1"));
-//        placePiece(new Bishop(Player.White, new Position("c1")), new Position("c1"));
-//        placePiece(new Queen(Player.White, new Position("d1")), new Position("d1"));
-//        placePiece(new King(Player.White, new Position("e1")), new Position("e1"));
-//        whiteKingPosition = new Position("e1");    	
-//        placePiece(new Bishop(Player.White, new Position("f1")), new Position("f1"));
-//        placePiece(new Knight(Player.White, new Position("g1")), new Position("g1"));
-//        placePiece(new Rook(Player.White, new Position("h1")), new Position("h1"));
-//        placePiece(new Pawn(Player.White, new Position("a2")), new Position("a2"));
-//        placePiece(new Pawn(Player.White, new Position("b2")), new Position("b2"));
-//        placePiece(new Pawn(Player.White, new Position("c2")), new Position("c2"));
-//        placePiece(new Pawn(Player.White, new Position("d2")), new Position("d2"));
-//        placePiece(new Pawn(Player.White, new Position("e2")), new Position("e2"));
-//        placePiece(new Pawn(Player.White, new Position("f2")), new Position("f2"));
-//        placePiece(new Pawn(Player.White, new Position("g2")), new Position("g2"));
-//        placePiece(new Pawn(Player.White, new Position("h2")), new Position("h2"));
-//
-//        // Black Pieces
-//        placePiece(new Rook(Player.Black, new Position("a8")), new Position("a8"));
-//        placePiece(new Knight(Player.Black, new Position("b8")), new Position("b8"));
-//        placePiece(new Bishop(Player.Black, new Position("c8")), new Position("c8"));
-//        placePiece(new Queen(Player.Black, new Position("d8")), new Position("d8"));
-//        placePiece(new King(Player.Black, new Position("e8")), new Position("e8"));
-//        blackKingPosition = new Position("e8");
-//        placePiece(new Bishop(Player.Black, new Position("f8")), new Position("f8"));
-//        placePiece(new Knight(Player.Black, new Position("g8")), new Position("g8"));
-//        placePiece(new Rook(Player.Black, new Position("h8")), new Position("h8"));
-//        placePiece(new Pawn(Player.Black, new Position("a7")), new Position("a7"));
-//        placePiece(new Pawn(Player.Black, new Position("b7")), new Position("b7"));
-//        placePiece(new Pawn(Player.Black, new Position("c7")), new Position("c7"));
-//        placePiece(new Pawn(Player.Black, new Position("d7")), new Position("d7"));
-//        placePiece(new Pawn(Player.Black, new Position("e7")), new Position("e7"));
-//        placePiece(new Pawn(Player.Black, new Position("f7")), new Position("f7"));
-//        placePiece(new Pawn(Player.Black, new Position("g7")), new Position("g7"));
-//        placePiece(new Pawn(Player.Black, new Position("h7")), new Position("h7"));
-
+        placePiece(new Rook(Player.White, new Position("a1")), new Position("a1"));
+        placePiece(new Knight(Player.White, new Position("b1")), new Position("b1"));
+        placePiece(new Bishop(Player.White, new Position("c1")), new Position("c1"));
+        placePiece(new Queen(Player.White, new Position("d1")), new Position("d1"));
+        placePiece(new King(Player.White, new Position("e1")), new Position("e1"));
+        whiteKingPosition = new Position("e1");    	
+        placePiece(new Bishop(Player.White, new Position("f1")), new Position("f1"));
+        placePiece(new Knight(Player.White, new Position("g1")), new Position("g1"));
+        placePiece(new Rook(Player.White, new Position("h1")), new Position("h1"));
+        placePiece(new Pawn(Player.White, new Position("a2")), new Position("a2"));
+        placePiece(new Pawn(Player.White, new Position("b2")), new Position("b2"));
+        placePiece(new Pawn(Player.White, new Position("c2")), new Position("c2"));
+        placePiece(new Pawn(Player.White, new Position("d2")), new Position("d2"));
+        placePiece(new Pawn(Player.White, new Position("e2")), new Position("e2"));
+        placePiece(new Pawn(Player.White, new Position("f2")), new Position("f2"));
+        placePiece(new Pawn(Player.White, new Position("g2")), new Position("g2"));
+        placePiece(new Pawn(Player.White, new Position("h2")), new Position("h2")); 
         
-        
+     /*   placePiece(new Rook(Player.White, new Position("c5")), new Position("c5"));
+        placePiece(new Knight(Player.White, new Position("c3")), new Position("c3"));
+        placePiece(new Bishop(Player.White, new Position("f5")), new Position("f5"));
+        placePiece(new Queen(Player.White, new Position("e5")), new Position("e5"));
         placePiece(new King(Player.White, new Position("e1")), new Position("e1"));
         whiteKingPosition = new Position("e1");
-        placePiece(new Rook(Player.White, new Position("e2")), new Position("e2"));
+        placePiece(new Pawn(Player.White, new Position("a4")), new Position("a4"));
+        Pawn testPawn;
+        testPawn = (Pawn)getPieceAt(new Position('a', 4));
+        testPawn.movePiece();
+        placePiece(new Pawn(Player.White, new Position("d2")), new Position("d2"));
+        placePiece(new Pawn(Player.White, new Position("e2")), new Position("e2"));
+        placePiece(new Pawn(Player.White, new Position("f2")), new Position("f2")); */
 
-
+        // Black Pieces
+        placePiece(new Rook(Player.Black, new Position("a8")), new Position("a8"));
+        placePiece(new Knight(Player.Black, new Position("b8")), new Position("b8"));
+        placePiece(new Bishop(Player.Black, new Position("c8")), new Position("c8"));
+        placePiece(new Queen(Player.Black, new Position("d8")), new Position("d8"));
         placePiece(new King(Player.Black, new Position("e8")), new Position("e8"));
         blackKingPosition = new Position("e8");
-        placePiece(new Bishop(Player.Black, new Position("g3")), new Position("g3"));
-        
-        
+        placePiece(new Bishop(Player.Black, new Position("f8")), new Position("f8"));
+        placePiece(new Knight(Player.Black, new Position("g8")), new Position("g8"));
+        placePiece(new Rook(Player.Black, new Position("h8")), new Position("h8"));
+        placePiece(new Pawn(Player.Black, new Position("a7")), new Position("a7"));
+        placePiece(new Pawn(Player.Black, new Position("b7")), new Position("b7"));
+        placePiece(new Pawn(Player.Black, new Position("c7")), new Position("c7"));
+        placePiece(new Pawn(Player.Black, new Position("d7")), new Position("d7"));
+        placePiece(new Pawn(Player.Black, new Position("e7")), new Position("e7"));
+        placePiece(new Pawn(Player.Black, new Position("f7")), new Position("f7"));
+        placePiece(new Pawn(Player.Black, new Position("g7")), new Position("g7"));
+        placePiece(new Pawn(Player.Black, new Position("h7")), new Position("h7"));
+
+
         
     }
 
@@ -126,11 +131,11 @@ public class GameState {
      * @param piece The piece to place
      * @param position The position
      */
-    private void placePiece(Piece piece, Position position) {
+    public void placePiece(Piece piece, Position position) {
         positionToPieceMap.put(position, piece);
     }
     
-    private void removePiece(Position position) {
+    public void removePiece(Position position) {
     	positionToPieceMap.remove(position);
     }
     
@@ -141,12 +146,12 @@ public class GameState {
      * @return
      */
     public boolean isKingCheck(Player playerTurn, Piece piece, Position initialPosition, Position finalPosition) {
-    	   	
+
     	boolean kingIsInCheck = false;
     	Piece capturedPiece = null;
     	
     	// Move the piece to the new position to check if the King is in check, this will be reverted at the end
-    	
+
 
     	this.removePiece(initialPosition);
     	capturedPiece = getPieceAt(finalPosition);    	
@@ -517,6 +522,7 @@ public class GameState {
     	
     	
     	fixPosition(piece, capturedPiece, finalPosition, initialPosition, playerTurn);
+    	
     	return kingIsInCheck;
     }
     
@@ -543,6 +549,14 @@ public class GameState {
     			blackKingPosition = initialPosition;
     		}
     	} 
+    }
+    
+    public void nextTurn(){
+    	if (currentPlayer == Player.White)
+    		currentPlayer = Player.Black;
+    	else {
+    		currentPlayer = Player.White;
+    	}
     }
    
 }

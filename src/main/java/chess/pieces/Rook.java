@@ -23,6 +23,7 @@ public class Rook extends Piece {
     
     @Override
     public List<String> getPossibleMoves(GameState gameState) {
+    	
     	List<String> possibleMoves = new ArrayList<String>();
     	Position newPosition = null;
     	int count = 0;
@@ -38,7 +39,9 @@ public class Rook extends Piece {
     		if (up){
     			newPosition = Position.getPositionOffset(this.currentPosition, 0, count);
     			if (validSpot(newPosition, gameState)) {
+    				
     				if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
+    					
     					possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
     			
     				if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) { 

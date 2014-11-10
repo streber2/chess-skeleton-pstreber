@@ -69,6 +69,16 @@ public class CLITest {
         assertEquals("Should have had 9 output calls", 9, output.size());
         assertEquals("It should have printed the board three times", output.get(2), output.get(4));
     }
+    
+    @Test
+    public void testListCommandInitialPositions() throws Exception {
+    	runCliWithInput("list");
+    	List<String> output = captureOutput();
+    	
+    	assertEquals("Should have had 26 prints - 6 initial and one for each of the 20 initial moves", 26, output.size());
+    	assertEquals("Spot check a few moves", "b1 c3", output.get(4));
+    	assertEquals("Spot check a few moves", "h2 h4", output.get(23));
+    }
 
     private List<String> captureOutput() {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
