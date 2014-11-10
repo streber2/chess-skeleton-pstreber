@@ -46,13 +46,16 @@ public class Pawn extends Piece {
     	enemyPiece = gameState.getPieceAt(newPosition);
     	// Can't use Piece.validSpot() because pawn cannot take a piece going straight forward
 		if ((enemyPiece == null) && newPosition!=null) {
-			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
+			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)){
+				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
+			}
 			
 			// If the pawn has not moved yet, it can move two spots forward, if there is no piece there
 			if (hasMoved == false){       		
 				newPosition = Position.getPositionOffset(newPosition, 0, moveAmount);
 				if (gameState.getPieceAt(newPosition) == null){
-					possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());    			
+					if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
+						possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());    			
 				}
 			}
 			
@@ -63,18 +66,29 @@ public class Pawn extends Piece {
 		enemyPiece = gameState.getPieceAt(newPosition);
 		if (enemyPiece !=null) {
 			if ((enemyPiece.getOwner() != this.owner) && (enemyPiece.getClass()!=King.class)){
-				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
+				if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
+					possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
 			}			
 		}
 		newPosition = Position.getPositionOffset(this.currentPosition, 1, moveAmount);
 		enemyPiece = gameState.getPieceAt(newPosition);
 		if (enemyPiece !=null) {
 			if ((enemyPiece.getOwner() != this.owner) && (enemyPiece.getClass()!=King.class)){
-				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
+				if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
+					possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
 			}						
-		}   	
+		} 
+
     	
     	return possibleMoves;
+    }
+    
+    /**
+     * This method is not yet implemented, would be for goal 2.
+     * However, for testing it needs to be here simple to set the flag hasMoved to true, otherwise the pawn could move 2 spots ever turn.
+     */
+    public void movePiece(){
+    	hasMoved = true;
     }
 }
 

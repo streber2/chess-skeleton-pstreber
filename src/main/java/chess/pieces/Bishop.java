@@ -27,146 +27,79 @@ public class Bishop extends Piece {
 
     	int count = 0;
     	// Bishop can move in a diagonal straight line (up left, up right, down left, down right). Can move until colliding with a unit.
-    	
-    	
+    	    	
     	boolean loop = true;
-    	boolean up=true, down=true, left=true, right = true;
-    	
+    	boolean upright=true, downright=true, upleft=true, downleft = true;
+        	
     	//Loop outwards from the piece, checking all 4 directions for possible moves
     	while (loop){
     		count++;
     		
     		// Moves going up right
-    		newPosition = Position.getPositionOffset(this.currentPosition, count, count);
-    		if (validSpot(newPosition, gameState)) {
-    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-    			
-    			if (gameState.getPieceAt(newPosition).getOwner() != this.owner) { 
-    				up = false;
-    			}
-    		} else {
-    			up = false;
+    		if (upright){
+	    		newPosition = Position.getPositionOffset(this.currentPosition, count, count);
+	    		if (validSpot(newPosition, gameState)) {
+	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
+	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
+	    			
+	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) {
+	    				upright = false;
+	    			}
+	    		} else {
+	    			upright = false;
+	    		}
     		}
     		
     		// Moves going down right
-    		newPosition = Position.getPositionOffset(this.currentPosition, count, (count*-1));
-    		if (validSpot(newPosition, gameState)) {
-    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-    			
-    			if (gameState.getPieceAt(newPosition).getOwner() != this.owner) { 
-    				down = false;
-    			}
-    		} else {
-    			down = false;
+    		if (downright){
+	    		newPosition = Position.getPositionOffset(this.currentPosition, count, (count*-1));
+	    		if (validSpot(newPosition, gameState)) {
+	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
+	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
+	    			
+	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) { 
+	    				downright = false;
+	    			}
+	    		} else {
+	    			downright = false;
+	    		}
     		}
     		
     		// Moves going up left
-    		newPosition = Position.getPositionOffset(this.currentPosition, (count*-1), count);
-    		if (validSpot(newPosition, gameState)) {
-    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-    			
-    			if (gameState.getPieceAt(newPosition).getOwner() != this.owner) { 
-    				right = false;
-    			}
-    		} else {
-    			right = false;
+    		if (upleft){    			    		
+	    		newPosition = Position.getPositionOffset(this.currentPosition, (count*-1), count);
+	    		if (validSpot(newPosition, gameState)) {
+	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
+	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
+	    			
+	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) {
+	    				upleft = false;
+	    			}
+	    		} else {
+	    			upleft = false;
+	    		}
     		}
     		
     		// Moves going down left
-    		newPosition = Position.getPositionOffset(this.currentPosition, (count*-1), (count*-1));
-    		if (validSpot(newPosition, gameState)) {
-    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-    			
-    			if (gameState.getPieceAt(newPosition).getOwner() != this.owner) { 
-    				left = false;
-    			}
-    		} else {
-    			left = false;
-    		}  		
-    		
-    		if (up || down || left || right)
+    		if (downleft){    			
+	    		newPosition = Position.getPositionOffset(this.currentPosition, (count*-1), (count*-1));
+	    		if (validSpot(newPosition, gameState)) {
+	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
+	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
+	    			
+	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) {
+	    				downleft = false;
+	    			}
+	    		} else {
+	    			downleft = false;
+	    		}  		
+    		}	
+    		if (upright || downright || upleft || downleft)
     			continue;
     		else 
     			loop = false;
     		
     	}
-    	
-    	
-    	
-//    	// Moves going up right
-//    	for (int i = this.currentPosition.getRow(), j = this.currentPosition.getColumn(); i <= Position.MAX_ROW && j <= Position.MAX_COLUMN; i++, j++){
-//    		count++;
-//    		newPosition = Position.getPositionOffset(this.currentPosition, count, count);
-//    		
-//    		if (newPosition == null){
-//    			break;
-//    		}
-//    		else if (gameState.getPieceAt(newPosition) == null){
-//    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-//    		} else if (gameState.getPieceAt(newPosition).getOwner() != this.owner){
-//    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-//    			break;
-//    		} else {
-//    			break;
-//    		}
-//    		
-//    	}
-//    	
-//    	count = 0;
-//    	// Moves going down right
-//    	for (int i = this.currentPosition.getRow(), j = this.currentPosition.getColumn(); i >= Position.MIN_ROW && j <= Position.MAX_COLUMN; i--, j++){
-//    		count--;
-//    		newPosition = Position.getPositionOffset(this.currentPosition, Math.abs(count), count);
-//    		if (newPosition == null){
-//    			break;
-//    		}
-//    		else if (gameState.getPieceAt(newPosition) == null){
-//    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-//    		} else if (gameState.getPieceAt(newPosition).getOwner() != this.owner){
-//    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-//    			break;
-//    		} else {
-//    			break;
-//    		}
-//    	}
-//    	
-//    	count=0;
-//    	// Moves going up left
-//    	for (int i = this.currentPosition.getRow(), j = this.currentPosition.getColumn(); i <= Position.MAX_ROW && j >= Position.MIN_COLUMN; i++, j--){
-//
-//    		count++;
-//    		newPosition = Position.getPositionOffset(this.currentPosition, count*-1, count); 
-//    		if (newPosition == null){    			
-//    			break;
-//    		}
-//    		else if (gameState.getPieceAt(newPosition) == null){
-//    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-//    		} else if (gameState.getPieceAt(newPosition).getOwner() != this.owner){
-//    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-//    			break;
-//    		} else {
-//    			break;
-//    		}
-//    	}
-//    	
-//    	count=0;
-//    	// Moves going down left
-//    	for (int i = this.currentPosition.getRow(), j = this.currentPosition.getColumn(); i >= Position.MIN_ROW && j >= Position.MIN_ROW; i--, j--){
-//
-//    		count--;
-//    		newPosition = Position.getPositionOffset(this.currentPosition, count, count);
-//    		if (newPosition == null){
-//    			break;
-//    		}
-//    		else if (gameState.getPieceAt(newPosition) == null){
-//    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-//    		} else if (gameState.getPieceAt(newPosition).getOwner() != this.owner){
-//    			possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-//    			break;
-//    		} else {
-//    			break;
-//    		}
-//    	}
     	
     	return possibleMoves;
     }

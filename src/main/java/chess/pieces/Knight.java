@@ -25,52 +25,57 @@ public class Knight extends Piece {
     	List<String> possibleMoves = new ArrayList<String>();
     	Position newPosition = null;    	
     	
+
+    		
+		if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
     	//Up 2, right 1    	  	    	
     	newPosition = Position.getPositionOffset(this.currentPosition, 2, 1);    
-    	if (validSpot(newPosition, gameState))
+    	if ((validSpot(newPosition, gameState)) && (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)))
     		possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
 
     	
     	//Up 2, left 1
     	newPosition = Position.getPositionOffset(this.currentPosition, 2, -1);
-    	if (validSpot(newPosition, gameState))
+    	if ((validSpot(newPosition, gameState)) && (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)))
     		possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
   
     	
     	//Up 1, right 2
     	newPosition = Position.getPositionOffset(this.currentPosition, 1, 2);
-    	if (validSpot(newPosition, gameState))
+    	if ((validSpot(newPosition, gameState)) && (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)))
     		possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
 
     	
     	//Up 1, left 2
     	newPosition = Position.getPositionOffset(this.currentPosition, 1, -2);
-    	if (validSpot(newPosition, gameState))
+    	if ((validSpot(newPosition, gameState)) && (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)))
     		possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
 
     	   	
     	//Down 2, right 1
     	newPosition = Position.getPositionOffset(this.currentPosition, -2, 1);
-    	if (validSpot(newPosition, gameState))
+    	if ((validSpot(newPosition, gameState)) && (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)))
     		possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
 
     	//Down 2, left 1
     	newPosition = Position.getPositionOffset(this.currentPosition, -2, -1);
-    	if (validSpot(newPosition, gameState))
+    	if ((validSpot(newPosition, gameState)) && (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)))
     		possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
 
     	
     	//Down 1, right 2
     	newPosition = Position.getPositionOffset(this.currentPosition, -1, 2);
-    	if (validSpot(newPosition, gameState))
+    	if ((validSpot(newPosition, gameState)) && (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)))
     		possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
 
     	
     	//Down 1, left 2
     	newPosition = Position.getPositionOffset(this.currentPosition, -1, -2);
-    	if (validSpot(newPosition, gameState))
+    	if ((validSpot(newPosition, gameState)) && (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)))
     		possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
     	
+    	
+
     	return possibleMoves;
     }
 

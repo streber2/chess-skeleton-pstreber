@@ -91,7 +91,6 @@ public class CLI {
     	
     	for (int i = 1; i <= 8; i++){
     		for (char j = 'a'; j<='h'; j++){
-    			
     			   			
     			Piece selectedPiece = gameState.getPieceAt(new Position(j, i));
     			if (selectedPiece !=null){
@@ -108,9 +107,7 @@ public class CLI {
     	
     	for (String output : listOfMoves){
     		writeOutput(output);
-    	}
-    	
-    	
+    	}    	
     }
 
     private void showBoard() {
