@@ -12,11 +12,10 @@ import chess.Position;
  */
 public abstract class Piece {
     protected final Player owner;
-    protected Position currentPosition;
 
-    protected Piece(Player owner, Position initialPosition) {
+    protected Piece(Player owner) {
         this.owner = owner;
-        this.currentPosition = initialPosition;
+
     }
 
     public char getIdentifier() {
@@ -32,14 +31,7 @@ public abstract class Piece {
         return owner;
     }
     
-    protected void setPosition(Position newPosition) {
-    	currentPosition = newPosition;
-    }
-    
-    protected Position getPosition() {
-    	return currentPosition;
-    }
-    
+  
     /**
      * Method to check if the spot on the board is a valid move for the Piece
      * @param newPosition
@@ -65,6 +57,6 @@ public abstract class Piece {
 
     protected abstract char getIdentifyingCharacter();
     
-    public abstract List<String> getPossibleMoves(GameState gameState);
+    public abstract List<String> getPossibleMoves(GameState gameState, Position currentPosition);
 }
 

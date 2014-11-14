@@ -12,8 +12,8 @@ import chess.Position;
  */
 public class Rook extends Piece {
 
-    public Rook(Player owner, Position initialPosition) {
-        super(owner, initialPosition);
+    public Rook(Player owner) {
+        super(owner);
     }
 
     @Override
@@ -22,87 +22,40 @@ public class Rook extends Piece {
     }
     
     @Override
-    public List<String> getPossibleMoves(GameState gameState) {
+    public List<String> getPossibleMoves(GameState gameState, Position currentPosition) {
     	
     	List<String> possibleMoves = new ArrayList<String>();
     	Position newPosition = null;
     	int count = 0;
     	// Rook can move left, right, up or down in a straight line. Can move until colliding with a unit.
-    	boolean loop = true;
-    	boolean up=true, down=true, left=true, right = true;
     	
+        boolean[] directionValid = {true, true, true, true};
+        int [][] offset = {
+        		{0,1}, {0,-1}, {1,0}, {-1,0}
+        };
+        
     	//Loop outwards from the piece, checking all 4 directions for possible moves
-    	while (loop){
+    	while (directionValid[0] || directionValid[1] || directionValid[2] || directionValid[3]){
     		count++;
     		
-    		// Moves going up
-    		if (up){
-    			newPosition = Position.getPositionOffset(this.currentPosition, 0, count);
-    			if (validSpot(newPosition, gameState)) {
-    				
-    				if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-    					
-    					possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-    			
-    				if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) { 
-    					up = false;
+    		for (int i = 0; i < 4; i++){
+    			if (directionValid[i]){
+    				newPosition = Position.getPositionOffset(currentPosition, count*offset[i][0], count*offset[i][1]);
+    				if (validSpot(newPosition, gameState)) {
+    	    			if (!gameState.isKingCheck(owner, this, currentPosition, newPosition))
+    	    				possibleMoves.add(currentPosition.toString() + " " + newPosition.toString());
+    	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) 
+    	    				directionValid[i] = false;
+    	    			
+    				} else {
+    					directionValid[i] = false;
     				}
-    			} else {
-    				up = false;
     			}
     		}
     		
-    		// Moves going down
-    		if (down){
-	    		newPosition = Position.getPositionOffset(this.currentPosition, 0, (count*-1));
-	    		if (validSpot(newPosition, gameState)) {
-	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-	    			
-	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) {
-	    				down = false;
-	    			}
-	    		} else {
-	    			down = false;
-	    		}
-    		}
-    		
-    		// Moves going right
-    		if (right){    			    		
-	    		newPosition = Position.getPositionOffset(this.currentPosition, count, 0);
-	    		if (validSpot(newPosition, gameState)) {
-	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-	    			
-	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) {
-	    				right = false;
-	    			}
-	    		} else {
-	    			right = false;
-	    		}
-    		}
-    		
-    		// Moves going left
-    		if (left) {    				    		
-	    		newPosition = Position.getPositionOffset(this.currentPosition, (count*-1), 0);
-	    		if (validSpot(newPosition, gameState)) {
-	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-	    			
-	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) {
-	    				left = false;
-	    			}
-	    		} else {    			
-	    			left = false;
-	    		}
-    		}
-    		
-    		if (up || down || left || right)
-    			continue;
-    		else 
-    			loop = false;
-    		
     	}
+    	
+  
 	
     	return possibleMoves;
     	

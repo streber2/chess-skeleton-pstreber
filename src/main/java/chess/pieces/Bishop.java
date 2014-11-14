@@ -11,8 +11,8 @@ import chess.Position;
  * The 'Bishop' class
  */
 public class Bishop extends Piece {
-    public Bishop(Player owner, Position initialPosition) {
-        super(owner, initialPosition);
+    public Bishop(Player owner) {
+        super(owner);
     }
 
     @Override
@@ -21,85 +21,38 @@ public class Bishop extends Piece {
     }
     
     @Override
-    public List<String> getPossibleMoves(GameState gameState) {
+    public List<String> getPossibleMoves(GameState gameState, Position currentPosition) {
     	List<String> possibleMoves = new ArrayList<String>();
     	Position newPosition = null;
 
     	int count = 0;
     	// Bishop can move in a diagonal straight line (up left, up right, down left, down right). Can move until colliding with a unit.
-    	    	
-    	boolean loop = true;
-    	boolean upright=true, downright=true, upleft=true, downleft = true;
-        	
+
+        boolean[] directionValid = {true, true, true, true};
+        int [][] offset = {
+        		{1,1}, {1,-1}, {-1,1}, {-1,-1}
+        };
+        
     	//Loop outwards from the piece, checking all 4 directions for possible moves
-    	while (loop){
+    	while (directionValid[0] || directionValid[1] || directionValid[2] || directionValid[3]){
     		count++;
     		
-    		// Moves going up right
-    		if (upright){
-	    		newPosition = Position.getPositionOffset(this.currentPosition, count, count);
-	    		if (validSpot(newPosition, gameState)) {
-	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-	    			
-	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) {
-	    				upright = false;
-	    			}
-	    		} else {
-	    			upright = false;
-	    		}
+    		for (int i = 0; i < 4; i++){
+    			if (directionValid[i]){
+    				newPosition = Position.getPositionOffset(currentPosition, count*offset[i][0], count*offset[i][1]);
+    				if (validSpot(newPosition, gameState)) {
+    	    			if (!gameState.isKingCheck(owner, this, currentPosition, newPosition))
+    	    				possibleMoves.add(currentPosition.toString() + " " + newPosition.toString());
+    	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) 
+    	    				directionValid[i] = false;
+    	    			
+    				} else {
+    					directionValid[i] = false;
+    				}
+    			}
     		}
     		
-    		// Moves going down right
-    		if (downright){
-	    		newPosition = Position.getPositionOffset(this.currentPosition, count, (count*-1));
-	    		if (validSpot(newPosition, gameState)) {
-	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-	    			
-	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) { 
-	    				downright = false;
-	    			}
-	    		} else {
-	    			downright = false;
-	    		}
-    		}
-    		
-    		// Moves going up left
-    		if (upleft){    			    		
-	    		newPosition = Position.getPositionOffset(this.currentPosition, (count*-1), count);
-	    		if (validSpot(newPosition, gameState)) {
-	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-	    			
-	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) {
-	    				upleft = false;
-	    			}
-	    		} else {
-	    			upleft = false;
-	    		}
-    		}
-    		
-    		// Moves going down left
-    		if (downleft){    			
-	    		newPosition = Position.getPositionOffset(this.currentPosition, (count*-1), (count*-1));
-	    		if (validSpot(newPosition, gameState)) {
-	    			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-	    				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-	    			
-	    			if ((gameState.getPieceAt(newPosition) !=null) && (gameState.getPieceAt(newPosition).getOwner() != this.owner)) {
-	    				downleft = false;
-	    			}
-	    		} else {
-	    			downleft = false;
-	    		}  		
-    		}	
-    		if (upright || downright || upleft || downleft)
-    			continue;
-    		else 
-    			loop = false;
-    		
-    	}
+    	}    		
     	
     	return possibleMoves;
     }

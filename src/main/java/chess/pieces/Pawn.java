@@ -14,8 +14,8 @@ public class Pawn extends Piece {
 	
 	private boolean hasMoved = false;
 	
-    public Pawn(Player owner, Position initialPosition) {
-        super(owner, initialPosition);
+    public Pawn(Player owner) {
+        super(owner);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class Pawn extends Piece {
     }
     
     @Override
-    public List<String> getPossibleMoves(GameState gameState) {
+    public List<String> getPossibleMoves(GameState gameState, Position currentPosition) {
     	
     	// Pawn moveset rules:
     	// A pawn can move one spot forward if no piece is there
@@ -35,51 +35,47 @@ public class Pawn extends Piece {
     	Piece enemyPiece = null;
     	
     	//TODO: Might be useless, remove after testing.
-		if (!((Position.MIN_ROW < this.currentPosition.getRow()) && (this.currentPosition.getRow() < Position.MAX_ROW))){
+		if (!((Position.MIN_ROW < currentPosition.getRow()) && (currentPosition.getRow() < Position.MAX_ROW))){
 			return null;
 		}
 		
 		int moveAmount = (this.owner == Player.White) ? 1 : -1;    	    		
-		
+	
 		// Pawn can move one spot forward, if no piece is there
-    	Position newPosition = Position.getPositionOffset(this.currentPosition,0, moveAmount);
+    	Position newPosition = Position.getPositionOffset(currentPosition,0, moveAmount);
     	enemyPiece = gameState.getPieceAt(newPosition);
     	// Can't use Piece.validSpot() because pawn cannot take a piece going straight forward
 		if ((enemyPiece == null) && newPosition!=null) {
-			if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition)){
-				possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
+			if (!gameState.isKingCheck(owner, this, currentPosition, newPosition)){
+				possibleMoves.add(currentPosition.toString() + " " + newPosition.toString());
 			}
 			
 			// If the pawn has not moved yet, it can move two spots forward, if there is no piece there
 			if (hasMoved == false){       		
 				newPosition = Position.getPositionOffset(newPosition, 0, moveAmount);
 				if (gameState.getPieceAt(newPosition) == null){
-					if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-						possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());    			
+					if (!gameState.isKingCheck(owner, this, currentPosition, newPosition))
+						possibleMoves.add(currentPosition.toString() + " " + newPosition.toString());    			
 				}
 			}
 			
 		}
     		    	
-		// If the pawn has an enemy piece diagonal to the left or right, it can take that piece unless it's a King
-		newPosition = Position.getPositionOffset(this.currentPosition, -1, moveAmount);
-		enemyPiece = gameState.getPieceAt(newPosition);
-		if (enemyPiece !=null) {
-			if ((enemyPiece.getOwner() != this.owner) && (enemyPiece.getClass()!=King.class)){
-				if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-					possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-			}			
-		}
-		newPosition = Position.getPositionOffset(this.currentPosition, 1, moveAmount);
-		enemyPiece = gameState.getPieceAt(newPosition);
-		if (enemyPiece !=null) {
-			if ((enemyPiece.getOwner() != this.owner) && (enemyPiece.getClass()!=King.class)){
-				if (!gameState.isKingCheck(owner, this, this.currentPosition, newPosition))
-					possibleMoves.add(this.currentPosition.toString() + " " + newPosition.toString());
-			}						
-		} 
-
+		// If the pawn has an enemy piece diagonal to the left or right, it can take that piece unless it's a King		
+    	int pawnPositions[] = {-1, 1};
     	
+    	for (int pawnPosition : pawnPositions){
+    		
+    		newPosition = Position.getPositionOffset(currentPosition, pawnPosition, moveAmount);
+    		enemyPiece = gameState.getPieceAt(newPosition);
+    		if (enemyPiece !=null) {
+    			if ((enemyPiece.getOwner() != this.owner) && (enemyPiece.getClass()!=King.class)){
+    				if (!gameState.isKingCheck(owner, this, currentPosition, newPosition))
+    					possibleMoves.add(currentPosition.toString() + " " + newPosition.toString());
+    			}			
+    		}    		
+    	}
+		
     	return possibleMoves;
     }
     

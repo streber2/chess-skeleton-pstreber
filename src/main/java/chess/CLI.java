@@ -91,11 +91,11 @@ public class CLI {
     	
     	for (int i = 1; i <= 8; i++){
     		for (char j = 'a'; j<='h'; j++){
-    			   			
-    			Piece selectedPiece = gameState.getPieceAt(new Position(j, i));
+    			Position selectedPosition = new Position(j, i);   			
+    			Piece selectedPiece = gameState.getPieceAt(selectedPosition); 
     			if (selectedPiece !=null){
     				if (selectedPiece.getOwner() == gameState.getCurrentPlayer()){
-    					List<String> pieceMoves = selectedPiece.getPossibleMoves(gameState);
+    					List<String> pieceMoves = selectedPiece.getPossibleMoves(gameState, selectedPosition);
     					if (pieceMoves !=null){
     						listOfMoves.addAll(pieceMoves);
     					}
