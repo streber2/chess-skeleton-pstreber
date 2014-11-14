@@ -83,7 +83,8 @@ public class GameState {
         placePiece(new Pawn(Player.Black), new Position("e7"));
         placePiece(new Pawn(Player.Black), new Position("f7"));
         placePiece(new Pawn(Player.Black), new Position("g7"));
-        placePiece(new Pawn(Player.Black), new Position("h7")); 
+        placePiece(new Pawn(Player.Black), new Position("h7"));  
+  
     }
 
     /**
@@ -148,7 +149,7 @@ public class GameState {
 
     	// Check if the piece being moved is a king, if it is make sure it isn't being moved adjacent to the enemy king
     	// If it's not moving adjacent to enemy king, set the new king position (to be reverted at the end)
-    	if (piece.getClass() == King.class) {        	
+    	if (piece instanceof King) {        	
     		
     		int [][] newKingPositions = {
         			{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}
@@ -158,7 +159,7 @@ public class GameState {
         		attackingPiecePosition = Position.getPositionOffset(finalPosition, posOffset[0], posOffset[1]);
         		if (attackingPiecePosition !=null)
         			attackingPiece = getPieceAt(attackingPiecePosition);
-            	if ((attackingPiece != null) && (attackingPiece.getClass() == King.class)){
+            	if ((attackingPiece != null) && (attackingPiece instanceof King)){
             		fixPosition(piece, capturedPiece, finalPosition, initialPosition, playerTurn);
             		return true; 
             	} 
@@ -180,7 +181,7 @@ public class GameState {
     	
     	for (int pawnPosition : pawnPositions){
         	attackingPiece = getPieceAt(Position.getPositionOffset(kingPosition, pawnPosition, moveAmount));    	
-        	if ((attackingPiece !=null) &&(attackingPiece.getOwner() != playerTurn) && (attackingPiece.getClass() == Pawn.class)){     	
+        	if ((attackingPiece !=null) &&(attackingPiece.getOwner() != playerTurn) && (attackingPiece instanceof Pawn)){     	
         		fixPosition(piece, capturedPiece, finalPosition, initialPosition, playerTurn);
         		return true;    	
         	}
@@ -212,10 +213,10 @@ public class GameState {
         			if (attackingPiece != null) {
         				if (attackingPiece.getOwner() == playerTurn){
         					directionValid[i] = false;
-        				} else if (((Math.abs(offset[i][0])>0) && (Math.abs(offset[i][1])>0)) && (attackingPiece.getClass() == Bishop.class) || (attackingPiece.getClass() == Queen.class)){
+        				} else if (((Math.abs(offset[i][0])>0) && (Math.abs(offset[i][1])>0)) && (attackingPiece instanceof Bishop) || (attackingPiece instanceof Queen)){
         					fixPosition(piece, capturedPiece, finalPosition, initialPosition, playerTurn);
         					return true;
-        				} else if (((Math.abs(offset[i][0])==0) || (Math.abs(offset[i][1])==0)) && (attackingPiece.getClass() == Rook.class) || (attackingPiece.getClass() == Queen.class)){
+        				} else if (((Math.abs(offset[i][0])==0) || (Math.abs(offset[i][1])==0)) && (attackingPiece instanceof Rook) || (attackingPiece instanceof Queen)){
         					fixPosition(piece, capturedPiece, finalPosition, initialPosition, playerTurn);
         					return true;
         				}
@@ -234,7 +235,7 @@ public class GameState {
     	for (int posOffset[] : newPositions){
     		attackingPiecePosition = Position.getPositionOffset(kingPosition, posOffset[0], posOffset[1]);
     		if (attackingPiecePosition != null) {
-        		if ((attackingPiece!=null) && (attackingPiece.getOwner()!= playerTurn) && (attackingPiece.getClass() == Knight.class)){
+        		if ((attackingPiece!=null) && (attackingPiece.getOwner()!= playerTurn) && (attackingPiece instanceof Knight)){
         			fixPosition(piece, capturedPiece, finalPosition, initialPosition, playerTurn);
         			return true;    		
         		}    	
@@ -262,7 +263,7 @@ public class GameState {
     	}
     		
     	
-    	if (piece.getClass() == King.class) {
+    	if (piece instanceof King) {
     		if (playerTurn == Player.White){    			
     			whiteKingPosition = initialPosition;
     		} else {    			

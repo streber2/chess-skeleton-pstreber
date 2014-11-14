@@ -45,7 +45,7 @@ public abstract class Piece {
     		enemyPiece = gameState.getPieceAt(newPosition);
     		if (gameState.getPieceAt(newPosition) == null){
     			return true;        		
-    		} else if ((enemyPiece.getOwner() != this.owner) && (enemyPiece.getClass()!=King.class)){
+    		} else if ((enemyPiece.getOwner() != this.owner) && (!(enemyPiece instanceof King))){
     			return true;        		
         	} else {
         		return false;

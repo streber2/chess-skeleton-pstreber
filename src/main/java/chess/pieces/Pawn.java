@@ -35,9 +35,9 @@ public class Pawn extends Piece {
     	Piece enemyPiece = null;
     	
     	//TODO: Might be useless, remove after testing.
-		if (!((Position.MIN_ROW < currentPosition.getRow()) && (currentPosition.getRow() < Position.MAX_ROW))){
+		/*if (!((Position.MIN_ROW < currentPosition.getRow()) && (currentPosition.getRow() < Position.MAX_ROW))){
 			return null;
-		}
+		} */
 		
 		int moveAmount = (this.owner == Player.White) ? 1 : -1;    	    		
 	
@@ -69,7 +69,7 @@ public class Pawn extends Piece {
     		newPosition = Position.getPositionOffset(currentPosition, pawnPosition, moveAmount);
     		enemyPiece = gameState.getPieceAt(newPosition);
     		if (enemyPiece !=null) {
-    			if ((enemyPiece.getOwner() != this.owner) && (enemyPiece.getClass()!=King.class)){
+    			if ((enemyPiece.getOwner() != this.owner) && (!(enemyPiece instanceof King))){
     				if (!gameState.isKingCheck(owner, this, currentPosition, newPosition))
     					possibleMoves.add(currentPosition.toString() + " " + newPosition.toString());
     			}			
